@@ -1,0 +1,26 @@
+{% extends 'adm.html' %}
+
+{% block main %}
+<table class="table">
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Titulo</td>
+        <td>Fecha</td>
+        <td>Acciones</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for publicacion in object_list %}
+    <tr>
+        <td>{{publicacion.id}}</td>
+        <td>{{publicacion.titulo}}</td>
+        <td>{{publicacion.fecha_publicacion}}</td>
+        <td>
+            <a href="{% url 'publicacion_update' publicacion.pk %}" class="btn btn-primary btn-outline">Editar</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock main %}
