@@ -1,26 +1,16 @@
 {% extends 'adm.html' %}
+{% load markdown_extras %}
 
 {% block main %}
-<table class="table">
-    <thead>
-    <tr>
-        <td>ID</td>
-        <td>Titulo</td>
-        <td>Fecha</td>
-        <td>Acciones</td>
-    </tr>
-    </thead>
-    <tbody>
-    {% for publicacion in object_list %}
-    <tr>
-        <td>{{publicacion.id}}</td>
-        <td>{{publicacion.titulo}}</td>
-        <td>{{publicacion.fecha_publicacion}}</td>
-        <td>
-            <a href="{% url 'publicacion_update' publicacion.pk %}" class="btn btn-primary btn-outline">Editar</a>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<h1 class="pt-3">¿Seguro que desea borrar?</h1>
+<div class="card my-4">
+    <div class="card-body">
+        {{object.contenido|markdown|safe}}
+    </div>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Eliminar</button>
+    <a href="{% url 'publicacion_list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
 {% endblock main %}
